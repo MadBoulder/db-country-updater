@@ -24,14 +24,14 @@ def main(db_path='../BetaLibrary/', is_update=True):
         lng = area_data['longitude']
         # The geopy installation has been modified to return countries un English
         geolocator = Nominatim(user_agent='my_email@myserver.com')
-        monkey_patch_geopy_base(geolocator, lang='es')
+        monkey_patch_geopy_base(geolocator, lang='en')
         location = geolocator.reverse(f"{lat}, {lng}")
-        found_country = location.raw['address']['country']
+        country_code = location.raw['address']['country_code']
         # print(location.raw)
-        print(area_data['name'], found_country)
-        print(location.address)
+        print(area_data['name'], country_code)
+        # print(location.address)
 
-        area_data['country'] = found_country
+        area_data['country'] = country_code
         with open(datafile, 'w', encoding='utf-8') as data:
            json.dump(area_data, data, indent=4)
 
