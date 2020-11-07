@@ -22,7 +22,7 @@ def main(db_path='../BetaLibrary/', is_update=True):
             continue
         lat = area_data['latitude']
         lng = area_data['longitude']
-        # The geopy installation has been modified to return countries un English
+        # The geopy installation has been modified to return countries in English
         geolocator = Nominatim(user_agent='my_email@myserver.com')
         monkey_patch_geopy_base(geolocator, lang='en')
         location = geolocator.reverse(f"{lat}, {lng}")
