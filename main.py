@@ -11,7 +11,7 @@ def main(db_path='../BetaLibrary/', is_update=True):
     # walk all data
     areas = next(os.walk(db_path + 'data/zones/'))[1]
     for area in areas:
-        time.sleep(1)
+        time.sleep(1) # rate limiter (as per Geopy's documentation)
         # Load data zone map
         datafile = db_path + 'data/zones/' + area + '/' + area + '.txt'
         area_data = {}
