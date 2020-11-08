@@ -12,9 +12,8 @@ def main(db_path='../BetaLibrary/', is_update=True):
     areas = next(os.walk(db_path + 'data/zones/'))[1]
     for area in areas:
         time.sleep(1) # rate limiter (as per Geopy's documentation)
-        # Load data zone map
+        # Load zone data
         datafile = db_path + 'data/zones/' + area + '/' + area + '.txt'
-        area_data = {}
         with open(datafile, encoding='utf-8') as data:
             area_data = json.load(data)
         if is_update and area_data.get('country', ''):
