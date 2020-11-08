@@ -19,12 +19,10 @@ def main(db_path='../BetaLibrary/', is_update=True):
         if is_update and area_data.get('country', ''):
             print(f'Skipping update for {area_data["name"]}')
             continue
-        lat = area_data['latitude']
-        lng = area_data['longitude']
-        # The geopy installation has been modified to return countries in English
         geolocator = Nominatim(user_agent='my_email@myserver.com')
+        # Patch geopy to return countries in English
         monkey_patch_geopy_base(geolocator, lang='en')
-        location = geolocator.reverse(f"{lat}, {lng}")
+        location = geolocator.reverse(f"{area_data['latitude']}, {area_data['longitude']}")
         country_code = location.raw['address']['country_code']
         # print(location.raw)
         print(area_data['name'], country_code)
