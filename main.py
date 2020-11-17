@@ -33,4 +33,4 @@ def main(db_path='../BetaLibrary/', is_update=True):
            json.dump(area_data, data, indent=4)
 
 if __name__ == "__main__":
-    main(is_update=False)
+    main(is_update=True)
