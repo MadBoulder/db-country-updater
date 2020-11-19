@@ -34,6 +34,7 @@ def main(db_path='../BetaLibrary/', is_update=True):
             # store match for future lookups if a country is missing in some zone data
             country_dict[location.raw[ADDRESS_KEY][COUNTRY_CODE_KEY]] = location.raw[ADDRESS_KEY][COUNTRY_KEY]
         except: 
+            # try to back up value by looking at the generated code: country map
             country = country_dict[location.raw[ADDRESS_KEY][COUNTRY_CODE_KEY]]
         # print(location.raw)
         print(area_data[COUNTRY_KEY], country)
