@@ -38,5 +38,25 @@ def main(db_path='../BetaLibrary/', is_update=True):
         with open(datafile, 'w', encoding='utf-8') as data:
            json.dump(area_data, data, indent=4)
 
+def update_single_zone(area, db_path='../BetaLibrary/'):
+    datafile = db_path + 'data/zones/' + area + '/' + area + '.txt'
+    with open(datafile, encoding='utf-8') as data:
+        area_data = json.load(data)
+    geolocator = Nominatim(user_agent='my_email@myserver.com')
+    # Patch geopy to return countries in English
+    monkey_patch_geopy_base(geolocator, lang='en')
+    location = geolocator.reverse(f"{area_data['latitude']}, {area_data['longitude']}")
+    print(location)
+    country = location.raw[ADDRESS_KEY][COUNTRY_CODE_KEY]
+    # print(location.raw)
+    print(area_data[NAME_KEY], country)
+    # print(location.address)
+
+    area_data[COUNTRY_KEY] = country
+    with open(datafile, 'w', encoding='utf-8') as data:
+        json.dump(area_data, data, indent=4)
+
+
 if __name__ == "__main__":
-    main(is_update=False)
+    # main(is_update=True)
+    update_single_zone('red_rocks')
