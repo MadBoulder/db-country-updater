@@ -19,7 +19,7 @@ def main(db_path='../BetaLibrary/', is_update=True):
     for area in areas:
         time.sleep(1) # rate limiter (as per Geopy's documentation)
         # Load zone data
-        datafile = db_path + 'data/zones/' + area + '/' + area + '.txt'
+        datafile = db_path + 'data/zones/' + area + '/' + area + '.json'
         with open(datafile, encoding='utf-8') as data:
             area_data = json.load(data)
         if is_update and area_data.get(COUNTRY_KEY, ''):
@@ -39,7 +39,7 @@ def main(db_path='../BetaLibrary/', is_update=True):
            json.dump(area_data, data, indent=4)
 
 def update_single_zone(area, db_path='../BetaLibrary/'):
-    datafile = db_path + 'data/zones/' + area + '/' + area + '.txt'
+    datafile = db_path + 'data/zones/' + area + '/' + area + '.json'
     with open(datafile, encoding='utf-8') as data:
         area_data = json.load(data)
     geolocator = Nominatim(user_agent='my_email@myserver.com')
@@ -59,4 +59,4 @@ def update_single_zone(area, db_path='../BetaLibrary/'):
 
 if __name__ == "__main__":
     # main(is_update=True)
-    update_single_zone('red_rocks')
+    update_single_zone('vastervik')
