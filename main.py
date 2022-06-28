@@ -59,4 +59,4 @@ def update_single_zone(area, db_path='../BetaLibrary/'):
 
 if __name__ == "__main__":
     # main(is_update=True)
-    update_single_zone('vastervik')
+    update_single_zone('sintra')
